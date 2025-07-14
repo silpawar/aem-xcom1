@@ -1,12 +1,12 @@
 {
   "mappings": [
-    "/content/aem-xcom1/:/",
-    "/content/aem-xcom1/configuration:/.helix/config.json",
-    "/content/aem-xcom1/headers:/.helix/headers.json",
-    "/content/aem-xcom1/metadata:/metadata.json",
-    "/content/aem-xcom1.resource/enrichment/enrichment.json:/enrichment/enrichment.json"
+    "/content/aem-xcomv4/:/",
+    "/content/aem-xcomv4/configuration:/.helix/config.json",
+    "/content/aem-xcomv4/headers:/.helix/headers.json",
+    "/content/aem-xcomv4/metadata:/metadata.json",
+    "/content/aem-xcomv4.resource/enrichment/enrichment.json:/enrichment/enrichment.json"
   ],
   "includes": [
-    "/content/aem-xcom1/"
+    "/content/aem-xcomv4/"
   ]
 }
