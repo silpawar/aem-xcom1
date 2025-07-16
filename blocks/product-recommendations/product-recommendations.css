@@ -23,7 +23,7 @@
     overflow: hidden;
     box-sizing: border-box;
     margin: 0;
-    padding: .5rem 1rem 0 0;
+    padding: 0.5rem 1rem 0 0;
     display: inline-block;
 }
 
@@ -58,6 +58,11 @@
 
 .footer__wrapper {
     display: flex;
+    flex-direction: column;
     gap: 10px;
-    align-items: center;
+    align-items: flex-start;
+}
+
+.dropin-tag-container {
+    background-color: var(--color-alert-800);
 }
