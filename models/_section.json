@@ -93,8 +93,7 @@
       "components": [
         { "...": "./_common-blocks.json" },
         "product-teaser",
-        "product-recommendations",
-        "commerce-shipment"
+        "product-recommendations"
       ]
     },
     {
