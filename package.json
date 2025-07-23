@@ -58,6 +58,7 @@
     "@dropins/storefront-recommendations": "~1.0.0",
     "@dropins/storefront-wishlist": "~1.0.0",
     "@dropins/tools": "1.3.0",
-    "@silpawar/custom-dropin-template": "^0.8.0"
+    "@silpawar/custom-dropin-template": "^0.8.0",
+    "htm": "^3.1.1"
   }
 }
