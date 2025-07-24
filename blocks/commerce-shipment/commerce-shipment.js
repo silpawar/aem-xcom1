@@ -14,9 +14,9 @@ function CreateShipment({ heading }) {
 
 export default async function decorate($block) {
   const placeholders = await fetchPlaceholders();
-  $block.innerHTML = '<div class="full-height"></div>';
   const blockConfig = readBlockConfig($block);
   console.log("$block", $block);
+  console.log("$blockConfig", blockConfig);
   console.log("$placeholders", placeholders);
   const app = html`<${CreateShipment} heading="${blockConfig.heading}" />`;
 
