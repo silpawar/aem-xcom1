@@ -5,7 +5,7 @@ import { readBlockConfig } from "../../scripts/aem.js";
 
 const html = htm.bind(h);
 
-function CreateShipment(heading) {
+function CreateShipment({ heading }) {
   return html`<${Fragment}>
     <h2 class="title">${heading}</h2>
     <input class="form-name" label="First Name" id="first-name"></input>
@@ -15,10 +15,10 @@ function CreateShipment(heading) {
 export default async function decorate($block) {
   const placeholders = await fetchPlaceholders();
   $block.innerHTML = '<div class="full-height"></div>';
-  const { heading = "" } = readBlockConfig($block);
+  const blockConfig = readBlockConfig($block);
   console.log("$block", $block);
   console.log("$placeholders", placeholders);
-  const app = html`<${CreateShipment(heading)} />`;
+  const app = html`<${CreateShipment} heading="${blockConfig.heading}" />`;
 
   render(app, $block);
 }
