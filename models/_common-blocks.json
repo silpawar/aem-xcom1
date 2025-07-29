@@ -8,5 +8,7 @@
   "columns",
   "fragment",
   "commerce-shipment",
-  "teaser"
+  "teaser",
+   "form",
+  "embed-adaptive-form"
 ]

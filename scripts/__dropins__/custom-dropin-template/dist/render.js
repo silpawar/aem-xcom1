@@ -1,5 +1,0 @@
-/*! Copyright 2025 Adobe
-All Rights Reserved. */
-(function(c,n){try{if(typeof document<"u"){const e=document.createElement("style"),d=n.styleId;for(const t in n.attributes)e.setAttribute(t,n.attributes[t]);e.setAttribute("data-dropin",d),e.appendChild(document.createTextNode(c));const o=document.querySelector('style[data-dropin="sdk"]');if(o)o.after(e);else{const t=document.querySelector('link[rel="stylesheet"], style');t?t.before(e):document.head.append(e)}}}catch(e){console.error("dropin-styles (injectCodeFunction)",e)}})(".acheckout-my-ui-component{color:brown}",{styleId:"ACheckout"});
-import{jsx as e}from"@dropins/tools/preact-jsx-runtime.js";import{Render as f}from"@dropins/tools/lib.js";import{useState as i,useEffect as m}from"@dropins/tools/preact-hooks.js";import{UIProvider as c}from"@dropins/tools/components.js";import{events as a}from"@dropins/tools/event-bus.js";const p={"":{}},u={default:p},d=({children:o})=>{const[t,n]=i("en_US");return m(()=>{const r=a.on("locale",s=>{n(s)},{eager:!0});return()=>{r==null||r.off()}},[]),e(c,{lang:t,langDefinitions:u,children:o})},x=new f(e(d,{}));export{x as render};
-//# sourceMappingURL=render.js.map

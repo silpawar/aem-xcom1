@@ -155,6 +155,18 @@
           "...": "../blocks/commerce-wishlist/_*.json#/definitions"
         }
       ]
+    },
+     {
+      "title": "Forms",
+      "id": "form",
+      "components": [
+        {
+          "...": "../blocks/form/_*.json#/definitions"
+        },
+        {
+          "...": "../blocks/embed-adaptive-form/_*.json#/definitions"
+        }
+      ]
     }
   ]
 }

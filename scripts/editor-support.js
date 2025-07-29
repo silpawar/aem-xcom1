@@ -5,48 +5,10 @@ import {
   decorateIcons,
   decorateSections,
   loadBlock,
-  loadScript,
   loadSections,
 } from './aem.js';
 import { decorateRichtext } from './editor-support-rte.js';
 import { decorateMain } from './scripts.js';
-
-window.xwalk = window.xwalk || {};
-window.xwalk.isAuthorEnv = true;
-window.xwalk.previewSku = 'ADB150';
-
-// set the filter for an UE editable
-function setUEFilter(element, filter) {
-  element.dataset.aueFilter = filter;
-}
-
-/**
- * See:
- * https://experienceleague.adobe.com/en/docs/experience-manager-cloud-service/content/implementing/developing/universal-editor/attributes-types#data-properties
- */
-function updateUEInstrumentation() {
-  const main = document.querySelector('main');
-  const template = document.querySelector('meta[name="template"]')?.content;
-  const sections = main.querySelectorAll('[data-aue-model$="section"]');
-  const templates = ['order-details', 'enrichment', 'pdp', 'cart', 'mini-cart', 'plp',
-    'checkout', 'search-order', 'search', 'login', 'forgot-password', 'create-account',
-    'account', 'orders', 'address', 'returns', 'account-order-details', 'order-status',
-    'create-return', 'return-details', 'confirm-account', 'create-password', 'wishlist'];
-  const columnTemplates = ['account', 'orders', 'address', 'returns', 'account-order-details'];
-
-  // updated section filters according to the template
-  if (templates.includes(template)) {
-    // update section filters
-    sections.forEach((section) => {
-      setUEFilter(section, `${template}-section`);
-    });
-  }
-
-  // templates with column design have additional section type
-  if (columnTemplates.includes(template)) {
-    setUEFilter(main, 'columns-main');
-  }
-}
 
 async function applyChanges(event) {
   // redecorate default content and blocks on patches (in the properties rail)
@@ -61,11 +23,7 @@ async function applyChanges(event) {
   const { content } = updates[0];
   if (!content) return false;
 
-  // load dompurify
-  await loadScript(`${window.hlx.codeBasePath}/scripts/dompurify.min.js`);
-
-  const sanitizedContent = window.DOMPurify.sanitize(content, { USE_PROFILES: { html: true } });
-  const parsedUpdate = new DOMParser().parseFromString(sanitizedContent, 'text/html');
+  const parsedUpdate = new DOMParser().parseFromString(content, 'text/html');
   const element = document.querySelector(`[data-aue-resource="${resource}"]`);
 
   if (element) {
@@ -87,7 +45,9 @@ async function applyChanges(event) {
     if (block) {
       const blockResource = block.getAttribute('data-aue-resource');
       const newBlock = parsedUpdate.querySelector(`[data-aue-resource="${blockResource}"]`);
-      if (newBlock) {
+      if (block.dataset.aueModel === 'form') {
+        return true;
+      } else if (newBlock) {
         newBlock.style.display = 'none';
         block.insertAdjacentElement('afterend', newBlock);
         decorateButtons(newBlock);
@@ -130,7 +90,7 @@ async function applyChanges(event) {
   return false;
 }
 
-function attachEventListners(main) {
+async function attachEventListners(main) {
   [
     'aue:content-patch',
     'aue:content-update',
@@ -141,15 +101,10 @@ function attachEventListners(main) {
   ].forEach((eventType) => main?.addEventListener(eventType, async (event) => {
     event.stopPropagation();
     const applied = await applyChanges(event);
-    if (applied) {
-      updateUEInstrumentation();
-    } else {
-      window.location.reload();
-    }
+    if (!applied) window.location.reload();
   }));
+  const module = await import('./form-editor-support.js');
+  module.attachEventListners(main);
 }
 
 attachEventListners(document.querySelector('main'));
-
-// update UE component filters on page load
-updateUEInstrumentation();

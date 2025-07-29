@@ -1,10 +1,5 @@
 // Dropin Components
-import {
-  Button,
-  Icon,
-  Tag,
-  provider as UI,
-} from "@dropins/tools/components.js";
+import { Button, Icon, provider as UI } from "@dropins/tools/components.js";
 
 import { tryRenderAemAssetsImage } from "@dropins/tools/lib/aem/assets.js";
 
